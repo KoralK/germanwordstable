@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>German Words</title>
+    <style>
+        table, th, td {
+            border: 1px solid black;
+        }
+    </style>
+</head>
+<body>
+    <table id="wordsTable">
+        <tr>
+            <th>English Word</th>
+            <th>German Word</th>
+            <th>Relation</th>
+            <th>Image</th>
+        </tr>
+    </table>
+
+    <script>
+        const words = [
+  { english: "House", german: "Haus", relation: "Sounds similar to 'house' in English." },
+  { english: "Book", german: "Buch", relation: "Sounds like 'book' in English." },
+  { english: "Man", german: "Mann", relation: "Sounds like 'man' in English." },
+  { english: "Woman", german: "Frau", relation: "Sounds like 'frow' in English, which could be associated with a woman frowning." },
+  { english: "Child", german: "Kind", relation: "Sounds like 'kind' in English, which could be associated with a kind child." },
+  { english: "Dog", german: "Hund", relation: "Sounds like 'hound' in English, which is a type of dog." },
+  { english: "Cat", german: "Katze", relation: "Sounds like 'cat' in English." },
+  { english: "Bird", german: "Vogel", relation: "Sounds like 'fogel' in English, which could be associated with a bird flying in the fog." },
+  { english: "Water", german: "Wasser", relation: "Sounds like 'vasser' in English, which could be associated with water." },
+  { english: "Milk", german: "Milch", relation: "Sounds like 'milk' in English." },
+  { english: "Bread", german: "Brot", relation: "Sounds like 'brought' in English, which could be associated with someone who brought bread." },
+  { english: "Car", german: "Auto", relation: "Sounds like 'auto' in English, which is short for automobile." },
+  { english: "Table", german: "Tisch", relation: "Sounds like 'dish' in English, which could be associated with a dish on a table." },
+  { english: "Chair", german: "Stuhl", relation: "Sounds like 'stool' in English, which is a type of chair." },
+  { english: "Door", german: "Tür", relation: "Sounds like 'tour' in English, which could be associated with a tour guide opening a door." },
+  { english: "Window", german: "Fenster", relation: "Sounds like 'fenster' in English, which could be associated with a window in a fen (a type of wetland)." },
+  { english: "Bed", german: "Bett", relation: "Sounds like 'bet' in English, which could be associated with a bet about who can make their bed the fastest." },
+  { english: "Clock", german: "Uhr", relation: "Sounds like 'oar' in English, which could be associated with a clock in a rowboat." },
+  { english: "Tree", german: "Baum", relation: "Sounds like 'boom' in English, which could be associated with a tree falling in the forest." },
+  { english: "Flower", german: "Blume", relation: "Sounds like 'bloom' in English, which is what flowers do." },
+  { english: "Sun", german: "Sonne", relation: "Sounds like 'son' in English, which could be associated with a son playing in the sun." },
+  { english: "Moon", german: "Mond", relation: "Sounds like 'monde' in French, which also means moon." },
+  { english: "Star", german: "Stern", relation: "Sounds like 'stern' in English, which could be associated with a stern-looking star." },
+  { english: "Sky", german: "Himmel", relation: "Sounds like 'hummel' in English, which is a type of figurine that could be imagined flying in the sky." },
+  { english: "Earth", german: "Erde", relation: "Sounds like 'herd' in English, which could be associated with a herd of animals on the earth." },
+  { english: "Sea", german: "Meer", relation: "Sounds like 'mere' in English, which could be associated with the sea being more than mere water." },
+  { english: "Mountain", german: "Berg", relation: "Sounds like 'berg' in English, which is short for iceberg, a type of mountain of ice." },
+  { english: "River", german: "Fluss", relation: "Sounds like 'floss' in English, which could be associated with a river flossing between its banks." },
+  { english: "Forest", german: "Wald", relation: "Sounds like 'walled' in English, which could be associated with a forest being a natural wall." },
+  { english: "Meadow", german: "Wiese", relation: "Sounds like 'weezy' in English, which could be associated with feeling weezy in a beautiful meadow." },
+  { english: "City", german: "Stadt", relation: "Sounds like 'stout' in English, which could be associated with a stout city." },
+  { english: "Village", german: "Dorf", relation: "Sounds like 'dwarf' in English, which could be associated with a small village." },
+  { english: "Country", german: "Land", relation: "Sounds like 'land' in English." },
+  { english: "World", german: "Welt", relation: "Sounds like 'welt' in English, which could be associated with the world leaving a welt on your heart." },
+  { english: "Human", german: "Mensch", relation: "Sounds like 'mensch' in Yiddish, which means a person of integrity and honor." },
+  { english: "Animal", german: "Tier", relation: "Sounds like 'tear' in English, which could be associated with an animal tearing through the forest." },
+  { english: "Plant", german: "Pflanze", relation: "Sounds like 'plants' in English." },
+  { english: "Stone", german: "Stein", relation: "Sounds like 'stain' in English, which could be associated with a stone causing a stain." },
+  { english: "Airplane", german: "Flugzeug", relation: "Sounds like 'flugzeug' in English, which could be associated with an airplane flying (flug) thing (zeug)." },
+  { english: "Ship", german: "Schiff", relation: "Sounds like 'ship' in English." },
+  { english: "Train", german: "Zug", relation: "Sounds like 'zug' in English, which could be associated with the sound a train makes." },
+  { english: "Bicycle", german: "Fahrrad", relation: "Sounds like 'far rad' in English, which could be associated with a bicycle being a far-out rad way to travel." },
+  { english: "Food", german: "Essen", relation: "Sounds like 'essence' in English, which could be" },
+  { english: "Drink", german: "Trinken", relation: "Sounds like 'tinkering' in English, which could be associated with tinkering with a drink recipe." },
+  { english: "Sleep", german: "Schlafen", relation: "Sounds like 'slapen' in English, which could be associated with sleeping soundly." }
+  ];
+        const table = document.getElementById('wordsTable');
+
+        words.forEach(word => {
+            fetch(`https://api.unsplash.com/search/photos?query=${word.english}&client_id=yo09P-a-LGAHE--B6KIAmZeeX3R-ontZN2CYw6ECZeI`)
+                .then(response => response.json())
+                .then(data => {
+                    let imageUrl = data.results[0].urls.small;
+
+                    let row = table.insertRow();
+                    let cell1 = row.insertCell();
+                    let cell2 = row.insertCell();
+                    let cell3 = row.insertCell();
+                    let cell4 = row.insertCell();
+
+                    cell1.innerText = word.english;
+                    cell2.innerText = word.german;
+                    cell3.innerText = word.relation;
+                    cell4.innerHTML = `<img src="${imageUrl}" alt="${word.english}">`;
+                });
+        });
+    </script>
+</body>
+</html>
